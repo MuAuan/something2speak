@@ -33,10 +33,10 @@ def text2speak(num0):
 
     conv = kakasi_.getConverter()
 
-    print(sentence)
-    print(conv.do(sentence))
+    #print(sentence)
+    #print(conv.do(sentence))
     char_list = list(conv.do(sentence))
-    print(char_list)
+    #print(char_list)
 
     kakasi_.setMode('H', 'a') # H(Hiragana) to a(roman)
     conv = kakasi_.getConverter()
@@ -45,7 +45,7 @@ def text2speak(num0):
         sent= conv.do(char_list[i])
         sentences.append(sent)
     
-    print(sentences)
+    #print(sentences)
     f_list=[]
     f_list=sentences
 
@@ -65,7 +65,7 @@ def text2speak(num0):
             continue
         else:
             wavfile = './pyaudio/aiueo/'+i+'.wav'
-        print(wavfile)
+        #print(wavfile)
         try:
             wr = wave.open(wavfile, "rb")
         except:
@@ -83,7 +83,7 @@ def conversation(questions,vecs):
     with open('conversation_.csv', 'a', newline='') as f: #a+ #w
         writer = csv.writer(f)
         while True:
-            print(line)
+            #print(line)
             writer.writerow({line})
             sims = cosine_similarity(vectorizer.transform([mecab.parse(line)]), vecs)
             index = np.argsort(sims[0])
@@ -97,7 +97,7 @@ def conversation(questions,vecs):
                     continue
                 else:
                     break
-            index_= index[-np.random.randint(1,7)]
+            
             print("({:.2f}): {}".format(sims[0][index_],questions[index_]))
             text2speak(questions[index_])
             time.sleep(2)
