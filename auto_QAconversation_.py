@@ -169,22 +169,21 @@ if args.stop_words:
     for line in open(args.stop_words, "r", encoding="utf-8"):
         stop_words.append(line.strip())
 
+vectorizer = TfidfVectorizer(token_pattern="(?u)\\b\\w+\\b", stop_words=stop_words)
 while True:
-    vectorizer = TfidfVectorizer(token_pattern="(?u)\\b\\w+\\b", stop_words=stop_words)
-    while True:
-        print("質問は、天気ですか、ブルべですか、それとも雑談ですか？")
-        line = input("> ")
-        if line=="天気":
-            questions_w, answers_w = train_questions(mecab,line)
-            vecs_w = vectorizer.fit_transform(questions_w)
-            conversation_QA(questions_w,answers_w,vecs_w,mecab,line)
-        elif line=="ブルべ":
-            questions_j, answers_j = train_questions(mecab,line)
-            vecs_j = vectorizer.fit_transform(questions_j)
-            conversation_QA(questions_j,answers_j,vecs_j,mecab,line)
-        elif line=="雑談":
-            questions = train_conv(mecab)
-            vecs = vectorizer.fit_transform(questions)
-            conversation(questions,vecs,mecab,line)
+    print("質問は、天気ですか、ブルべですか、それとも雑談ですか？")
+    line = input("> ")
+    if line=="天気":
+        questions_w, answers_w = train_questions(mecab,line)
+        vecs_w = vectorizer.fit_transform(questions_w)
+        conversation_QA(questions_w,answers_w,vecs_w,mecab,line)
+    elif line=="ブルべ":
+        questions_j, answers_j = train_questions(mecab,line)
+        vecs_j = vectorizer.fit_transform(questions_j)
+        conversation_QA(questions_j,answers_j,vecs_j,mecab,line)
+    elif line=="雑談":
+        questions = train_conv(mecab)
+        vecs = vectorizer.fit_transform(questions)
+        conversation(questions,vecs,mecab,line)
             
    
