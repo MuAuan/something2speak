@@ -1,5 +1,5 @@
 # coding: utf-8
-#$ python3 auto_QAconversation_nano.py -d /usr/lib/aarch64-linux-gnu/mecab/dic/mecab-ipadic-neologd conversation_s.csv  -s stop_words.txt
+#$ python3 auto_QAconversation_nano.py -d /usr/lib/aarch64-linux-gnu/mecab/dic/mecab-ipadic-neologd conversation_s.txt  -s stop_words.txt
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
